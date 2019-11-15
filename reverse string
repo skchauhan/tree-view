@@ -1,0 +1,26 @@
+<?php 
+function revert(string $input) : string {
+    // get all characters; asuming ascii
+    $chars = [];
+    for($i = 0; $i < strlen($input); $i++) {
+        if (ctype_alpha($input[$i])) {
+            $chars[] = $input[$i];
+        }
+    }
+
+
+    // replace characters
+    for($i = 0;$i < strlen($input); $i++) {
+        if (ctype_alpha($input[$i])) {
+			echo $i;
+            $input[$i] = array_pop($chars);
+        }
+    }
+print_r($chars);
+    return $input;
+}
+
+$val = "a,b,d?";
+echo revert($val);
+
+//echo 'ddd';
