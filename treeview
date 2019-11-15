@@ -1,0 +1,34 @@
+<?php 
+$conn = mysqli_connect('localhost', 'root', '', 'test');
+
+if(mysqli_connect_errno()) 
+{
+	die(mysqli_connect_error());
+}
+
+ttt(0);
+
+function ttt($id) 
+{
+	global $conn;
+	
+	$strQ = "select * from `treeview_items` where parent_id = '$id'";
+	$strR = mysqli_query($conn, $strQ) or die(mysqli_error($conn));
+
+	if( mysqli_num_rows($strR) ) 
+	{
+		echo '<ul>';
+		while($row = mysqli_fetch_assoc($strR))
+		{
+			echo '<li>'. $row['name'] ;
+			ttt( $row['id'] );
+			echo '</li>';	
+			
+			
+		}
+		echo '</ul>';
+	}
+}
+
+
+?>
